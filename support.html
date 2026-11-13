@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cold Aisle Support</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+<nav><a href="index.html">Cold Aisle</a><a href="privacy.html">Privacy</a></nav>
+<h1>Support</h1>
+<p class="muted">Help for Cold Aisle on iPhone and iPad.</p>
+
+<div class="card">
+<p><strong>Get in touch:</strong> most answers are on this page. For anything else, open an issue at <a href="https://github.com/amgarcia2235/coldaisle-site/issues">github.com/amgarcia2235/coldaisle-site/issues</a>. We reply within 48 hours.</p>
+<p>Issues are public. Please do not post passwords, server addresses, serial numbers or host names there. Saying which board and which BMC firmware version you have is enough to start.</p>
+</div>
+
+<h2>Getting started</h2>
+<ol>
+<li>Want to look around first? On the empty Servers screen tap <em>Try it with demo servers</em>, or turn on Settings &gt; Demo servers. Four simulated servers appear; nothing they do touches the network.</li>
+<li>To add a real server, tap + and enter the address of its management controller (BMC). This is the BMC's own address, not the address of the operating system.</li>
+<li>The app tries Redfish first, then IPMI. For Redfish it shows you the fingerprint of the server's certificate before you type a password; compare it with the BMC's web page if you can.</li>
+<li>Enter the BMC user name and password. They are stored in the Keychain on this device only.</li>
+</ol>
+<p>Your iPhone or iPad must be able to reach the BMC's address: on the same network, or through a VPN that iOS supports.</p>
+
+<h2>Common questions</h2>
+
+<p><strong>The app cannot reach my server.</strong></p>
+<ul>
+<li>Check that the phone is on the management network or on a VPN into it. Opening the BMC's web page in Safari on the same phone is a quick test.</li>
+<li>iOS asks once for Local Network permission. If you declined, turn it on in iPhone Settings &gt; Privacy &amp; Security &gt; Local Network &gt; Cold Aisle.</li>
+<li>For IPMI, "IPMI over LAN" must be enabled on the BMC, and UDP port 623 must be allowed through any firewall between you and it. Some BMCs ship with IPMI over LAN turned off; it is switched on in the BMC's own web interface.</li>
+<li>A VPN of the PPTP kind cannot be used: iOS has not supported PPTP since iOS 10. IKEv2 and L2TP work.</li>
+</ul>
+
+<p><strong>It says the certificate changed.</strong> The server is presenting a different certificate than the one you accepted. If you replaced the certificate or updated or reset the BMC, open Settings &gt; Certificate pins, reset the pin for that server, and connect again to see the new fingerprint. If you did not, do not enter your password until you know why.</p>
+
+<p><strong>Sign-in fails with the right password.</strong> Check that the BMC user is enabled for the interface in use (some BMCs set Redfish and IPMI access separately per user), and that the account is not locked after too many attempts. BMCs that require an extra IPMI key (Kg) are not supported in this version.</p>
+
+<p><strong>Sensors or the event log are missing.</strong> Some BMCs give sensors and logs over Redfish only with a license. Cold Aisle then uses IPMI for that server if it is enabled. The Connection screen of a server (Hardware &gt; Connection) shows which protocol is in use and what works over it.</p>
+
+<p><strong>The power buttons open the Pro sheet.</strong> Power control is part of Cold Aisle Pro. Health, sensors, the event log and the identify light are free for two servers.</p>
+
+<p><strong>A power action is refused.</strong> The BMC user needs operator or administrator rights to control power. A clean shut down also needs an operating system that answers; if it does not, use Force off or Power cycle.</p>
+
+<p><strong>The widget is out of date.</strong> The widget shows the app's last check. Open the app to refresh it, or turn on Settings &gt; Refresh in the background (iOS decides how often that runs).</p>
+
+<p><strong>I bought Pro on another device.</strong> Settings &gt; Restore purchases.</p>
+
+<h2>What it does not do</h2>
+<p>This version has no remote console (KVM) and does not update firmware.</p>
+
+<h2>Subscriptions</h2>
+<p>Monthly and yearly Pro renew until cancelled. Manage or cancel them in iPhone Settings &gt; your name &gt; Subscriptions. The lifetime option is a single purchase.</p>
+</main>
+</body>
+</html>
