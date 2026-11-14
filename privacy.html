@@ -10,47 +10,59 @@
 <main>
 <nav><a href="index.html">Cold Aisle</a><a href="support.html">Support</a></nav>
 <h1>Privacy Policy</h1>
-<p class="muted">Effective November 13, 2026</p>
+<p class="muted">Effective November 14, 2026</p>
 
 <div class="card">
-<p><strong>Short version:</strong> Cold Aisle does not collect any data. There is no account, no server of ours, no ads, no analytics and no tracking. What you enter and what the app reads from your servers stays on your iPhone or iPad and travels only between it and the servers you add.</p>
+<p><strong>Short version:</strong> Cold Aisle does not collect any data. There is no account, no server of ours, no ads, no analytics and no tracking. What you enter and what the app reads from your servers stays on your Mac, iPhone or iPad and travels only between it and the servers you add. Two things are off unless you turn them on: keeping your list of servers in your own iCloud, and letting your iPhone reach servers by way of your own Mac. Both are described below.</p>
 </div>
 
 <h2>What the app stores, and where it stays</h2>
 <p>On your device only:</p>
 <ul>
 <li>The servers you add: the name and tag you give them, their address and ports, and the user name.</li>
-<li>Passwords, in the iOS Keychain, marked for this device only. They are not included in backups that can be restored to another device and they do not sync through iCloud Keychain.</li>
+<li>Passwords, in the device's Keychain, marked for this device only. They are not included in backups that can be restored to another device and they do not sync through iCloud Keychain.</li>
 <li>For a server reached over Redfish, the fingerprint of its certificate, so the app can tell you if it ever changes.</li>
 <li>The result of the last check of each server: its health, power state, the time, and the hardware summary the BMC reports (maker, model, serial number, firmware versions). For a server reached over IPMI, also its list of sensors, so the next check is quick.</li>
 <li>Your settings.</li>
 </ul>
-<p>Sensor readings and event log entries are shown while you look at them and are not kept. The app does not upload, sync or share any of this. Deleting the app deletes it from your device.</p>
+<p>Sensor readings and event log entries are shown while you look at them and are not kept. Unless you turn on iCloud sync (next section), the app does not upload, sync or share any of this. Deleting the app deletes it from your device.</p>
+
+<h2>iCloud sync of the server list (off unless you turn it on)</h2>
+<p>If you turn on "Sync servers with iCloud" in Settings, the list of your servers is kept in your own iCloud account so your other devices have it: each server's name, address and ports, sign-in name, tags, protocol and certificate fingerprint. Apple stores it under your Apple Account and its terms; the developer cannot see it. Passwords are never synced: each device asks for a server's password once. The results of checks, sensor readings, event logs and the demo servers are not synced. Turning the setting off stops the syncing; what is already in your iCloud stays there until you remove the servers or delete the app's iCloud data in your device's iCloud settings.</p>
 
 <h2>What the app connects to</h2>
 <ul>
 <li><strong>Your servers' management controllers (BMCs)</strong>, at the addresses you enter: over HTTPS for Redfish and over IPMI 2.0 (UDP port 623 unless you change it). Your user name and password are sent only to that address, and for Redfish only to the certificate you were shown when you added the server.</li>
 <li><strong>Apple</strong>, for purchases and to check what you have bought.</li>
+<li><strong>Apple's iCloud</strong>, only if you turn on iCloud sync, for the list described above.</li>
+<li><strong>Your own Mac</strong>, only if you turn on the Mac bridge (below).</li>
 </ul>
-<p>Nothing else. There is no relay and no server run by the developer. iOS asks for Local Network permission the first time the app reaches an address on your network; the app uses it only to reach the addresses you entered.</p>
+<p>Nothing else. There is no server run by the developer and nothing passes through one. The system asks for Local Network permission the first time the app reaches an address on your network; the app uses it only to reach the addresses you entered and, if you use the bridge, to find your Mac.</p>
+
+<h2>The Mac bridge (off unless you turn it on)</h2>
+<p>Cold Aisle on a Mac can carry your iPhone's or iPad's connections to your servers, for networks the phone cannot reach by itself. You switch it on on the Mac, which shows a pairing code, and type that code into the phone once. The two then talk only to each other, on your local network, encrypted with a key made from the code. The Mac passes connections on only to servers saved in its own list. For Redfish it carries the phone's own encrypted connection and never sees the server's password; IPMI traffic is already encrypted between the phone and the server. Nothing is stored on the Mac from what it carries, and none of it leaves your network.</p>
+
+<h2>Consoles and firmware</h2>
+<p>The serial console and the BMC's own web console are connections between your device and that server, like everything else. The web console keeps no cookies, and the app never types a saved password into the BMC's page. A firmware file you choose is read from where you keep it and sent only to the server you picked.</p>
+
 
 <h2>The widget and background refresh</h2>
-<p>The Home Screen widget shows the result of the app's last check, which the app saves on your device for it. The widget itself does not use the network or read passwords. If you turn on background refresh in Settings, the app can check your servers while it is closed; for that, saved passwords become readable while the phone is locked after its first unlock. This is off unless you turn it on.</p>
+<p>On iPhone and iPad, the Home Screen widget shows the result of the app's last check, which the app saves on your device for it. The widget itself does not use the network or read passwords. If you turn on background refresh in Settings, the app can check your servers while it is closed; for that, saved passwords become readable while the phone is locked after its first unlock. This is off unless you turn it on. On a Mac, the app checks your servers for as long as it is open, and its menu bar item shows the result.</p>
 
 <h2>Face ID and Touch ID</h2>
-<p>If you turn on the app lock, iOS checks your face, fingerprint or passcode and tells the app only whether it passed. The app never sees or stores biometric data.</p>
+<p>If you turn on the app lock, the system checks your face, fingerprint, passcode or Mac password and tells the app only whether it passed. The app never sees or stores biometric data.</p>
 
 <h2>Device backups</h2>
-<p>If you back up your iPhone or iPad with iCloud Backup or to your computer, that backup includes the list of your servers and your settings, under Apple's terms. Passwords are not restored to a different device.</p>
+<p>If you back up your device with iCloud Backup, Time Machine or to your computer, that backup includes the list of your servers and your settings, under Apple's terms. Passwords are not restored to a different device.</p>
 
 <h2>Purchases</h2>
 <p>Cold Aisle Pro is sold through Apple's in-app purchase. Apple handles the payment; the developer never sees your payment details. Apple gives developers sales totals that do not identify you.</p>
 
 <h2>Diagnostics from Apple</h2>
-<p>The app contains no crash reporting or analytics code of its own. If you have chosen in iOS Settings to share analytics with app developers, Apple may give the developer crash reports and usage totals that do not identify you.</p>
+<p>The app contains no crash reporting or analytics code of its own. If you have chosen in your device's settings to share analytics with app developers, Apple may give the developer crash reports and usage totals that do not identify you.</p>
 
 <h2>Compatibility reports</h2>
-<p>A server's Connection screen can make a short compatibility report: the maker and model of the board, its BMC and BIOS firmware versions, the protocol in use and which features work. It leaves out the server's name, address, ports, user name, serial number, host name, certificate and password. The app shows you the text and hands it to the iOS share sheet; it never sends it anywhere by itself. If you send it to the developer, for example in a support issue, it is used only to make the app work with that kind of board.</p>
+<p>A server's Connection screen can make a short compatibility report: the maker and model of the board, its BMC and BIOS firmware versions, the protocol in use and which features work. It leaves out the server's name, address, ports, user name, serial number, host name, certificate and password. The app shows you the text and hands it to the system's share sheet; it never sends it anywhere by itself. If you send it to the developer, for example in a support issue, it is used only to make the app work with that kind of board.</p>
 
 <h2>Demo servers</h2>
 <p>The built-in demo servers are simulated inside the app. Using them makes no network connection.</p>
