@@ -25,7 +25,7 @@
 <li>The result of the last check of each server: its health, power state, the time, and the hardware summary the BMC reports (maker, model, serial number, firmware versions). For a server reached over IPMI, also its list of sensors, so the next check is quick.</li>
 <li>Your settings.</li>
 </ul>
-<p>Sensor readings and event log entries are shown while you look at them and are not kept. Unless you turn on iCloud sync (next section), the app does not upload, sync or share any of this. Deleting the app deletes it from your device.</p>
+<p>Event log entries are shown while you look at them and are not kept. Sensor readings are kept for one day, on your device only, so the app can show how a reading has moved; they are deleted when you remove the server. Unless you turn on iCloud sync (next section), the app does not upload, sync or share any of this. Deleting the app deletes it from your device.</p>
 
 <h2>iCloud sync of the server list (off unless you turn it on)</h2>
 <p>If you turn on "Sync servers with iCloud" in Settings, the list of your servers is kept in your own iCloud account so your other devices have it: each server's name, address and ports, sign-in name, tags, protocol and certificate fingerprint. Apple stores it under your Apple Account and its terms; the developer cannot see it. Passwords are never synced: each device asks for a server's password once. The results of checks, sensor readings, event logs and the demo servers are not synced. Turning the setting off stops the syncing; what is already in your iCloud stays there until you remove the servers or delete the app's iCloud data in your device's iCloud settings.</p>
