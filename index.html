@@ -3,19 +3,264 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cold Aisle</title>
+<title>Cold Aisle: IPMI &amp; Redfish</title>
+<meta name="description" content="Server down? Still reachable. Cold Aisle talks straight to the BMC over IPMI 2.0 or Redfish from your iPhone, iPad or Mac. No agent, no account, nothing in between.">
+<link rel="canonical" href="https://coldaisle.dev/">
+<meta property="og:title" content="Cold Aisle: IPMI &amp; Redfish">
+<meta property="og:description" content="Server down? Still reachable. Cold Aisle talks straight to the BMC over IPMI 2.0 or Redfish from your iPhone, iPad or Mac. No agent, no account, nothing in between.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://coldaisle.dev/">
+<meta property="og:image" content="https://coldaisle.dev/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Cold Aisle: Server down? Still reachable.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Cold Aisle: IPMI &amp; Redfish">
+<meta name="twitter:description" content="Server down? Still reachable. Cold Aisle talks straight to the BMC over IPMI 2.0 or Redfish from your iPhone, iPad or Mac. No agent, no account, nothing in between.">
+<meta name="twitter:image" content="https://coldaisle.dev/img/og.jpg">
+<meta name="theme-color" content="#0b151d">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
 <link rel="stylesheet" href="style.css">
 </head>
-<body>
-<main>
-<h1>Cold Aisle</h1>
-<p class="muted">Server down? Still reachable. IPMI and Redfish for iPhone and iPad.</p>
-<div class="card">
-<p>Every server board carries a second, small computer that stays awake as long as the machine has power: its management controller, the BMC. Cold Aisle talks straight to it, so it works when the operating system is hung, shut down, or not installed yet.</p>
-<p>See health, temperatures, fans, voltages and power supplies, read the hardware event log in plain language, and power a server on, off or through a cycle, each behind a press and hold.</p>
-<p>No agent on the server, no relay, no account. The app collects nothing.</p>
+<body class="face">
+<a class="skip" href="#main">Skip to content</a>
+<svg class="sprite" aria-hidden="true" focusable="false">
+<defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#ff7a2e" fill-opacity=".16"/><path d="M0 0V5" stroke="#ff7a2e" stroke-width="1.6"/></pattern></defs>
+<symbol id="l-ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="currentColor"/><path d="M6.2 11.4l3.2 3.2 6.4-7" fill="none" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="l-warn" viewBox="0 0 22 22"><path d="M11 1.8 21.2 19.6a.9.9 0 0 1-.8 1.4H1.6a.9.9 0 0 1-.8-1.4z" fill="currentColor"/><path d="M11 8v6" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round"/><circle cx="11" cy="17.4" r="1.4" fill="#0b151d"/></symbol>
+<symbol id="l-fault" viewBox="0 0 22 22"><path d="M7 1h8l6 6v8l-6 6H7l-6-6V7z" fill="currentColor"/><path d="M7.5 7.5l7 7m0-7l-7 7" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round"/></symbol>
+<symbol id="l-id" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="currentColor"/><path d="M11 5a4.2 4.2 0 0 0-2.5 7.6c.5.4.7.9.7 1.4h3.6c0-.5.2-1 .7-1.4A4.2 4.2 0 0 0 11 5zM9.4 15.6h3.2V17H9.4z" fill="#0b151d"/></symbol>
+<symbol id="l-none" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9.6" fill="#1e2c37" stroke="currentColor" stroke-width="1.6"/><path d="M7 11h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+<div class="rack">
+<div class="rail" aria-hidden="true"></div>
+<div class="bay">
+
+<header class="unit">
+<nav class="mast" aria-label="Main">
+<a class="brand" href="index.html"><img src="img/icon-96.png" width="30" height="30" alt="">Cold Aisle</a>
+<ul>
+<li class="opt"><a href="#sensors">Sensors</a></li>
+<li class="opt"><a href="#log">Event log</a></li>
+<li class="opt"><a href="#power">Power</a></li>
+<li class="opt"><a href="#mac">Mac</a></li>
+<li class="opt"><a href="#spec">Specification</a></li>
+<li><a href="support.html">Support</a></li>
+<li><a href="privacy.html">Privacy</a></li>
+</ul>
+</nav>
+</header>
+
+<main id="main">
+<div class="bay" style="padding:0">
+
+<section class="unit">
+<div class="top">
+<p class="eng kick">IPMI 2.0 and Redfish for iPhone, iPad and Mac</p>
+<h1><span class="dim">Server down?</span> <span>Still reachable.</span></h1>
 </div>
-<p><a href="support.html">Support</a> &middot; <a href="privacy.html">Privacy Policy</a></p>
+<div class="hero">
+<div>
+<p class="lead">Most server boards have a second, tiny computer on them called the BMC. It stays awake as long as the machine has power, even when the OS is hung, shut down, or not installed yet. Cold Aisle talks to it directly.</p>
+<div class="bank">
+<ul>
+<li class="out" style="--d:0.5s"><span class="eng">OS</span><span class="stack"><svg class="lamp  l-none" aria-hidden="true"><use href="#l-none"/></svg><svg class="lamp lit l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg></span><span class="word"><span class="was" aria-hidden="true">Up</span><span class="now">Hung</span></span></li>
+<li class="out" style="--d:1.0s"><span class="eng">SSH</span><span class="stack"><svg class="lamp  l-none" aria-hidden="true"><use href="#l-none"/></svg><svg class="lamp lit l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg></span><span class="word"><span class="was" aria-hidden="true">Up</span><span class="now">Timed out</span></span></li>
+<li class="out" style="--d:1.5s"><span class="eng">Dashboard</span><span class="stack"><svg class="lamp  l-none" aria-hidden="true"><use href="#l-none"/></svg><svg class="lamp lit l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg></span><span class="word"><span class="was" aria-hidden="true">Up</span><span class="now">Blank</span></span></li>
+<li class="up"><span class="eng">BMC</span><svg class="lamp  l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span class="word">Awake</span></li>
+</ul>
+<p class="verdict"><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg>You still have a way in.</p>
+</div>
+<!-- badge:start -->
+<!-- When the app is live: delete the "soon" paragraph below and uncomment this link.
+<a class="badge" href="https://apps.apple.com/app/id6834197526"><img src="img/app-store-badge.svg" width="144" height="48" alt="Download on the App Store"></a>
+-->
+<!-- badge:end -->
+<p class="soon"><span class="eng">Availability</span><b>Coming to iPhone, iPad and Mac.</b></p>
+</div>
+<div class="screens">
+<figure>
+<img class="win" src="img/mac-server.jpg" width="1400" height="875" alt="Cold Aisle on the Mac: a sidebar of four demo servers and the server colo-r64 showing a warning for FAN4 at 600 RPM, with its sensors, event log and hardware details.">
+</figure>
+<img class="phone" src="img/iphone-servers.jpg" width="414" height="900" alt="Cold Aisle on iPhone: the server list with one fault, one warning and two healthy demo servers.">
+</div>
+</div>
+</section>
+
+<div class="blank" aria-hidden="true"></div>
+
+<section class="unit" aria-labelledby="h-path">
+<div class="plate" aria-hidden="true"><span class="eng">Signal path</span><span class="eng">U38</span></div>
+<div class="sec c-6-6">
+<div>
+<h2 id="h-path">There's nothing in the middle.</h2>
+<p class="body">The app connects to your BMCs directly, or through your own Mac running Cold Aisle if you turn that on. It uses Redfish where the server has it and falls back to IPMI where it doesn't.</p>
+</div>
+<div>
+<dl class="reads">
+<div><dt class="eng">Agents on the server</dt><dd>0</dd></div>
+<div><dt class="eng">Accounts</dt><dd>0</dd></div>
+<div><dt class="eng">Servers of ours</dt><dd>0</dd></div>
+<div><dt class="eng">Analytics</dt><dd>0</dd></div>
+</dl>
+<div class="path">
+<div class="node"><span class="eng">Your device</span><b>iPhone, iPad, Mac</b></div>
+<div class="wire"><span>Redfish over HTTPS</span><span>IPMI 2.0 on UDP 623</span></div>
+<div class="node"><span class="eng">Your server</span><b>BMC</b></div>
+</div>
+</div>
+</div>
+</section>
+
+<section class="unit" id="sensors" aria-labelledby="h-sens">
+<div class="plate" aria-hidden="true"><span class="eng">Sensors</span><span class="eng">U34</span></div>
+<div class="sec c-7-5">
+<div>
+<h2 id="h-sens">Every reading, against the limits the board reports.</h2>
+<p class="body">Temperatures, fans, voltages and power supplies, with anything out of range at the top. See how each temperature and fan has moved over the last day.</p>
+<ul class="sens" aria-label="Example sensor readings">
+<li><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span class="n">CPU1 Temp</span><span class="scale-c"><svg class="scale" viewBox="0 0 420 26" aria-hidden="true"><rect x="340.0" y="6" width="40.0" height="12" fill="url(#hatch)"/><rect x="380.0" y="6" width="40.0" height="12" fill="#ff6b7a"/><path d="M0 18H420" stroke="#6f8391"/><path d="M21.4 13V18M42.4 13V18M63.4 13V18M84.3 13V18M126.2 13V18M147.2 13V18M168.1 13V18M189.1 13V18M230.9 13V18M251.9 13V18M272.9 13V18M293.8 13V18M335.7 13V18M356.6 13V18M377.6 13V18M398.6 13V18" stroke="#34495a"/><path d="M0.5 6V18M105.2 6V18M210.0 6V18M314.8 6V18M419.5 6V18" stroke="#6f8391"/><path d="M176.0 20V23H208.0V20" fill="none" stroke="#8ea2b1" stroke-width="1.6"/><path d="M192.0 5V19" stroke="#d6e2ea" stroke-width="2.4"/><path d="M187.0 0h10l-5 6z" fill="#d6e2ea"/></svg></span><span class="v">48<small>°C</small><span class="vh">, in range</span></span></li>
+<li><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span class="n">Inlet Temp</span><span class="scale-c"><svg class="scale" viewBox="0 0 420 26" aria-hidden="true"><rect x="336.0" y="6" width="42.0" height="12" fill="url(#hatch)"/><rect x="378.0" y="6" width="42.0" height="12" fill="#ff6b7a"/><path d="M0 18H420" stroke="#6f8391"/><path d="M21.4 13V18M42.4 13V18M63.4 13V18M84.3 13V18M126.2 13V18M147.2 13V18M168.1 13V18M189.1 13V18M230.9 13V18M251.9 13V18M272.9 13V18M293.8 13V18M335.7 13V18M356.6 13V18M377.6 13V18M398.6 13V18" stroke="#34495a"/><path d="M0.5 6V18M105.2 6V18M210.0 6V18M314.8 6V18M419.5 6V18" stroke="#6f8391"/><path d="M176.4 20V23H218.4V20" fill="none" stroke="#8ea2b1" stroke-width="1.6"/><path d="M201.6 5V19" stroke="#d6e2ea" stroke-width="2.4"/><path d="M196.6 0h10l-5 6z" fill="#d6e2ea"/></svg></span><span class="v">24<small>°C</small><span class="vh">, in range</span></span></li>
+<li><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span class="n">12V</span><span class="scale-c"><svg class="scale" viewBox="0 0 420 26" aria-hidden="true"><rect x="0.0" y="6" width="52.5" height="12" fill="#ff6b7a"/><rect x="52.5" y="6" width="78.7" height="12" fill="url(#hatch)"/><rect x="288.7" y="6" width="78.8" height="12" fill="url(#hatch)"/><rect x="367.5" y="6" width="52.5" height="12" fill="#ff6b7a"/><path d="M0 18H420" stroke="#6f8391"/><path d="M21.4 13V18M42.4 13V18M63.4 13V18M84.3 13V18M126.2 13V18M147.2 13V18M168.1 13V18M189.1 13V18M230.9 13V18M251.9 13V18M272.9 13V18M293.8 13V18M335.7 13V18M356.6 13V18M377.6 13V18M398.6 13V18" stroke="#34495a"/><path d="M0.5 6V18M105.2 6V18M210.0 6V18M314.8 6V18M419.5 6V18" stroke="#6f8391"/><path d="M196.9 20V23H236.2V20" fill="none" stroke="#8ea2b1" stroke-width="1.6"/><path d="M223.1 5V19" stroke="#d6e2ea" stroke-width="2.4"/><path d="M218.1 0h10l-5 6z" fill="#d6e2ea"/></svg></span><span class="v">12.1<small>V</small><span class="vh">, in range</span></span></li>
+<li><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span class="n">FAN1</span><span class="scale-c"><svg class="scale" viewBox="0 0 420 26" aria-hidden="true"><rect x="0.0" y="6" width="23.3" height="12" fill="#ff6b7a"/><rect x="23.3" y="6" width="9.3" height="12" fill="url(#hatch)"/><path d="M0 18H420" stroke="#6f8391"/><path d="M21.4 13V18M42.4 13V18M63.4 13V18M84.3 13V18M126.2 13V18M147.2 13V18M168.1 13V18M189.1 13V18M230.9 13V18M251.9 13V18M272.9 13V18M293.8 13V18M335.7 13V18M356.6 13V18M377.6 13V18M398.6 13V18" stroke="#34495a"/><path d="M0.5 6V18M105.2 6V18M210.0 6V18M314.8 6V18M419.5 6V18" stroke="#6f8391"/><path d="M242.7 20V23H261.3V20" fill="none" stroke="#8ea2b1" stroke-width="1.6"/><path d="M252.0 5V19" stroke="#d6e2ea" stroke-width="2.4"/><path d="M247.0 0h10l-5 6z" fill="#d6e2ea"/></svg></span><span class="v">5,400<small>RPM</small><span class="vh">, in range</span></span></li>
+<li class="edge"><svg class="lamp s l-warn glow" aria-hidden="true"><use href="#l-warn"/></svg><span class="n">FAN4</span><span class="scale-c"><svg class="scale" viewBox="0 0 420 26" aria-hidden="true"><rect x="0.0" y="6" width="23.3" height="12" fill="#ff6b7a"/><rect x="23.3" y="6" width="9.3" height="12" fill="url(#hatch)"/><path d="M0 18H420" stroke="#6f8391"/><path d="M21.4 13V18M42.4 13V18M63.4 13V18M84.3 13V18M126.2 13V18M147.2 13V18M168.1 13V18M189.1 13V18M230.9 13V18M251.9 13V18M272.9 13V18M293.8 13V18M335.7 13V18M356.6 13V18M377.6 13V18M398.6 13V18" stroke="#34495a"/><path d="M0.5 6V18M105.2 6V18M210.0 6V18M314.8 6V18M419.5 6V18" stroke="#6f8391"/><path d="M28.0 20V23H252.0V20" fill="none" stroke="#8ea2b1" stroke-width="1.6"/><path d="M28.0 5V19" stroke="#ff7a2e" stroke-width="2.4"/><path d="M23.0 0h10l-5 6z" fill="#ff7a2e"/></svg></span><span class="v">600<small>RPM</small><span class="vh">, below its lower warning limit</span></span></li>
+</ul>
+<ul class="key" aria-label="How to read the scale">
+<li><svg viewBox="0 0 26 12" aria-hidden="true"><rect width="26" height="12" fill="url(#hatch)"/></svg>Warning band</li>
+<li><svg viewBox="0 0 26 12" aria-hidden="true"><rect width="26" height="12" fill="#ff6b7a"/></svg>Critical band</li>
+<li><svg viewBox="0 0 26 12" aria-hidden="true"><path d="M2 3v5h22V3" fill="none" stroke="#8ea2b1" stroke-width="1.8"/></svg>Range over the last day</li>
+<li><svg viewBox="0 0 26 12" aria-hidden="true"><path d="M13 3v9" stroke="#d6e2ea" stroke-width="2.4"/><path d="M8 0h10l-5 5z" fill="#d6e2ea"/></svg>Reading now</li>
+</ul>
+<p class="note">Example values from the built-in demo server.</p>
+</div>
+<figure class="solo">
+<img class="phone" src="img/iphone-sensors.jpg" width="414" height="900" loading="lazy" alt="The Sensors screen on iPhone: six temperatures in range, and fans with FAN4 highlighted at 600 RPM.">
+</figure>
+</div>
+</section>
+
+<div class="blank" aria-hidden="true"></div>
+
+<section class="unit" id="log" aria-labelledby="h-log">
+<div class="plate" aria-hidden="true"><span class="eng">Event log</span><span class="eng">U28</span></div>
+<div class="sec c-5-7">
+<div>
+<h2 id="h-log">The hardware event log, in plain English.</h2>
+<p class="body">The raw detail is one tap away if you want it. Open an event to see what it usually means and what to try.</p>
+<p class="body">On the Mac there's also a spot to paste raw log lines from a ticket or a terminal and read them the same way: raw IPMI event records, lines from ipmitool's <span class="addr">sel list</span>, and Redfish log entries as JSON.</p>
+<p class="body">Copy a server's state as text and paste it straight into a ticket.</p>
+</div>
+<figure>
+<img class="win" src="img/mac-log-reader.jpg" width="1100" height="965" loading="lazy" alt="The Read a Log window on the Mac: three pasted raw log lines decoded into a fan fault, a correctable memory error and a power button press, with what the fault usually means and what to try.">
+</figure>
+</div>
+</section>
+
+<section class="unit" id="power" aria-labelledby="h-power">
+<div class="plate" aria-hidden="true"><span class="eng">Power</span><span class="eng">U22</span></div>
+<div class="bigrow" aria-hidden="true"><p class="bigname">colo-r64</p><p class="bigaddr">10.0.8.15</p></div>
+<div class="sec c-6-6" style="padding-top:clamp(28px,3vw,44px)">
+<div>
+<h2 id="h-power">So you don't reboot the wrong box at 3 a.m.</h2>
+<p class="body">Before any power action, the app shows the server's name and address in big type and makes you press and hold.</p>
+<ul class="caps" aria-label="Power actions">
+<li>Power on</li><li>Shut down</li><li>Reset</li><li>Force off</li><li>Power cycle</li>
+</ul>
+<p class="ident"><svg class="lamp  l-id glow" aria-hidden="true"><use href="#l-id"/></svg><span>Blink the identify light to find the right machine in the rack.</span></p>
+</div>
+<figure>
+<img class="win" src="img/mac-confirm.jpg" width="1000" height="893" loading="lazy" alt="The power cycle confirmation on the Mac: the name colo-r64 and address 10.0.8.15 in large type above a red button labelled Hold to power cycle.">
+</figure>
+</div>
+</section>
+
+<div class="blank" aria-hidden="true"></div>
+
+<section class="unit" id="mac" aria-labelledby="h-mac">
+<div class="plate" aria-hidden="true"><span class="eng">Mac, iPad, iPhone</span><span class="eng">U16</span></div>
+<div class="sec c-6-6">
+<div>
+<h2 id="h-mac">Your whole fleet fits in one window.</h2>
+<p class="body">Every server sits in a sidebar, grouped by tag, with its state shown as a shape as well as a color, so you never have to rely on color alone.</p>
+<ul class="shapes" aria-label="Status shapes">
+<li><svg class="lamp  l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg>Green disc</li><li><svg class="lamp  l-warn glow" aria-hidden="true"><use href="#l-warn"/></svg>Orange triangle</li><li><svg class="lamp  l-fault glow" aria-hidden="true"><use href="#l-fault"/></svg>Crimson octagon</li>
+</ul>
+<ul class="ticks">
+<li><b>Menu bar.</b> The icon is a little rack while everything's fine and changes shape when something needs you.</li>
+<li><b>Windows.</b> Pop any server into its own window to keep a few side by side.</li>
+<li><b>Bulk add.</b> Paste a list to add a lot of servers at once.</li>
+<li><b>Serial console.</b> Serial over LAN for firmware setup, the boot loader or a serial login.</li>
+<li><b>Web console.</b> The BMC's own web console in a window, which only loads for the certificate you pinned.</li>
+<li><b>Readdressing.</b> Server got a new address? Paste it in. It keeps its name, sign-in and history.</li>
+<li><b>Home Screen.</b> On iPhone and iPad, keep the servers you care about on a widget.</li>
+</ul>
+</div>
+<div class="pair">
+<figure><img class="win" src="img/mac-sidebar.jpg" width="598" height="800" loading="lazy" alt="Close-up of the Mac sidebar: colo-r64 with a warning triangle, edge-02 with a fault octagon, lab-01 and backup-nas with green discs."></figure>
+<figure><img class="tablet" src="img/ipad-server.jpg" width="675" height="900" loading="lazy" alt="Cold Aisle on iPad: the server list beside the detail of colo-r64, with sensors, event log and console."></figure>
+</div>
+</div>
+</section>
+
+<section class="unit" id="spec" aria-labelledby="h-spec">
+<div class="plate" aria-hidden="true"><span class="eng">Datasheet</span><span class="eng">U12</span></div>
+<div class="sec c-6-6">
+<div>
+<h2 id="h-spec">Specification</h2>
+<table class="sheet spec">
+<tbody>
+<tr><th scope="row">Protocols</th><td>IPMI 2.0 and Redfish</td></tr>
+<tr><th scope="row">Works with</th><td>Any BMC that speaks IPMI 2.0 or Redfish: Supermicro, Dell iDRAC, HPE iLO, ASRock Rack and others. What each one offers depends on its maker, firmware and licenses. The app tells you what works on each server.</td></tr>
+<tr><th scope="row">No Redfish license</th><td>Older or second-hand boards without one work fine over IPMI.</td></tr>
+<tr><th scope="row">Passwords</th><td>Stay in the device's Keychain.</td></tr>
+<tr><th scope="row">Redfish certificates</th><td>You see the certificate before you type a password. Pinned the first time and checked every time after. If it ever changes, the app stops and tells you.</td></tr>
+<tr><th scope="row">IPMI sessions</th><td>Only signs in with authentication and encryption on. It never uses the unprotected mode some BMCs still allow.</td></tr>
+<tr><th scope="row">App lock</th><td>Face ID or Touch ID.</td></tr>
+<tr><th scope="row">No hardware handy</th><td>Four demo servers are built in, so you can poke around every screen first.</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<h3 class="eng" style="padding-top:12px">Free and Pro</h3>
+<table class="sheet plans">
+<thead><tr><td></td><th scope="col" class="m eng">Free</th><th scope="col" class="m eng">Pro</th></tr></thead>
+<tbody>
+<tr><th scope="row">Servers</th><td class="m">2</td><td class="m">Unlimited</td></tr>
+<tr><th scope="row">Health, sensors, event log</th><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td></tr>
+<tr><th scope="row">Identify light</th><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td></tr>
+<tr><th scope="row">Power control</th><td class="m"><svg class="lamp s l-none" aria-hidden="true"><use href="#l-none"/></svg><span class="vh">Not included</span></td><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td></tr>
+<tr><th scope="row">Serial console and BMC web console</th><td class="m"><svg class="lamp s l-none" aria-hidden="true"><use href="#l-none"/></svg><span class="vh">Not included</span></td><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td></tr>
+<tr><th scope="row">Notification on a warning or a fault</th><td class="m"><svg class="lamp s l-none" aria-hidden="true"><use href="#l-none"/></svg><span class="vh">Not included</span></td><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td></tr>
+<tr><th scope="row">Clearing the event log</th><td class="m"><svg class="lamp s l-none" aria-hidden="true"><use href="#l-none"/></svg><span class="vh">Not included</span></td><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td></tr>
+<tr><th scope="row">Home Screen widget</th><td class="m"><svg class="lamp s l-none" aria-hidden="true"><use href="#l-none"/></svg><span class="vh">Not included</span></td><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td></tr>
+</tbody>
+</table>
+<p class="note">Pay monthly, yearly or once. All three unlock the same things. One purchase covers your Mac, iPhone and iPad.</p>
+<div class="limits">
+<h3 class="eng">What it doesn't do</h3>
+<p>There's no built-in graphical KVM. For that, the app opens the BMC's own web console.</p>
+<p>Your device has to be able to reach the BMC's address, whether that's on the same network, through remote access into that network, or through your Mac.</p>
+</div>
+</div>
+</div>
+</section>
+
+</div>
 </main>
+
+<footer class="unit">
+<div class="end">
+<a class="brand" href="index.html"><img src="img/icon-96.png" width="30" height="30" alt="" loading="lazy">Cold Aisle</a>
+<nav aria-label="Footer"><ul>
+<li><a href="support.html">Support</a></li>
+<li><a href="privacy.html">Privacy Policy</a></li>
+</ul></nav>
+</div>
+</footer>
+
+</div>
+<div class="rail" aria-hidden="true"></div>
+</div>
 </body>
 </html>
