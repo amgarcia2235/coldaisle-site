@@ -67,7 +67,7 @@
     last = D.translate(input.value);
     out.textContent = "";
     copyBtn.hidden = last.length === 0;
-    if (!last.length) { sum.firstChild.textContent = "Nothing decoded yet"; out.appendChild(el("p", "empty", "Paste a line on the left, or load the sample. Results appear here.")); return; }
+    if (!last.length) { sum.firstChild.textContent = "Nothing decoded yet"; out.appendChild(el("p", "empty", "Paste a line, or load the sample. Results appear here.")); return; }
     var f = last.filter(function (e) { return e.severity === "critical"; }).length, w = last.filter(function (e) { return e.severity === "warning"; }).length;
     sum.firstChild.textContent = plural(last.length, "entry").replace("entrys", "entries") + ": " + plural(f, "fault") + ", " + plural(w, "warning");
     last.forEach(function (e) { out.appendChild(card(e)); });
