@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
 <title>Cold Aisle Privacy Policy</title>
 <meta name="description" content="Cold Aisle does not collect any data. There is no account, no server of ours, no ads, no analytics and no tracking.">
 <link rel="canonical" href="https://coldaisle.dev/privacy.html">
@@ -13,7 +14,7 @@
 <meta property="og:image" content="https://coldaisle.dev/img/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Cold Aisle: Server down? Still reachable.">
+<meta property="og:image:alt" content="Cold Aisle Privacy Policy">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Cold Aisle Privacy Policy">
 <meta name="twitter:description" content="Cold Aisle does not collect any data. There is no account, no server of ours, no ads, no analytics and no tracking.">
@@ -21,12 +22,33 @@
 <meta name="theme-color" content="#0b151d">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="alternate" type="application/atom+xml" title="Cold Aisle news" href="feed.xml">
 <link rel="stylesheet" href="style.css">
 </head>
-<body class="doc">
-<a class="skip" href="#content">Skip to content</a>
-<main>
-<nav><a href="index.html">Cold Aisle</a><a href="support.html">Support</a></nav>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg class="sprite" aria-hidden="true" focusable="false">
+<defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#ff7a2e" fill-opacity=".16"/><path d="M0 0V5" stroke="#ff7a2e" stroke-width="1.6"/></pattern></defs>
+<symbol id="l-ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="currentColor"/><path d="M6.2 11.4l3.2 3.2 6.4-7" fill="none" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="l-warn" viewBox="0 0 22 22"><path d="M11 1.8 21.2 19.6a.9.9 0 0 1-.8 1.4H1.6a.9.9 0 0 1-.8-1.4z" fill="currentColor"/><path d="M11 8v6" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round"/><circle cx="11" cy="17.4" r="1.4" fill="#0b151d"/></symbol>
+<symbol id="l-fault" viewBox="0 0 22 22"><path d="M7 1h8l6 6v8l-6 6H7l-6-6V7z" fill="currentColor"/><path d="M7.5 7.5l7 7m0-7l-7 7" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round"/></symbol>
+<symbol id="l-id" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="currentColor"/><path d="M11 5a4.2 4.2 0 0 0-2.5 7.6c.5.4.7.9.7 1.4h3.6c0-.5.2-1 .7-1.4A4.2 4.2 0 0 0 11 5zM9.4 15.6h3.2V17H9.4z" fill="#0b151d"/></symbol>
+<symbol id="l-none" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9.6" fill="#1e2c37" stroke="currentColor" stroke-width="1.6"/><path d="M7 11h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+<div class="rack">
+<div class="rail" aria-hidden="true"></div>
+<div class="bay">
+<header class="unit">
+<nav class="mast" aria-label="Main">
+<a class="brand" href="./"><img src="img/icon-96.png" width="30" height="30" alt="">Cold Aisle</a>
+<ul><li><a href="decode/">Decoder</a></li><li><a href="ipmitool/">ipmitool</a></li><li><a href="3am/">3 a.m.</a></li><li><a href="support.html">Support</a></li></ul>
+</nav>
+</header>
+<main id="main">
+<section class="unit">
+<div class="doc">
+<nav class="side" aria-label="On this page"><h2 class="eng">On this page</h2><ul><li><a href="#what-the-app-stores-and-where-it-stays">What the app stores, and where it stays</a></li><li><a href="#icloud-sync-of-the-server-list-off-unless-you-turn-it-on">iCloud sync of the server list (off unless you turn it on)</a></li><li><a href="#what-the-app-connects-to">What the app connects to</a></li><li><a href="#the-mac-bridge-off-unless-you-turn-it-on">The Mac bridge (off unless you turn it on)</a></li><li><a href="#consoles-and-firmware">Consoles and firmware</a></li><li><a href="#the-widget-and-background-refresh">The widget and background refresh</a></li><li><a href="#face-id-and-touch-id">Face ID and Touch ID</a></li><li><a href="#device-backups">Device backups</a></li><li><a href="#purchases">Purchases</a></li><li><a href="#diagnostics-from-apple">Diagnostics from Apple</a></li><li><a href="#compatibility-reports">Compatibility reports</a></li><li><a href="#demo-servers">Demo servers</a></li><li><a href="#children">Children</a></li><li><a href="#changes">Changes</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+<div class="prose">
 <h1 id="content" tabindex="-1">Privacy Policy</h1>
 <p class="muted">Effective November 14, 2026</p>
 
@@ -34,7 +56,7 @@
 <p><strong>Short version:</strong> Cold Aisle does not collect any data. There is no account, no server of ours, no ads, no analytics and no tracking. What you enter and what the app reads from your servers stays on your Mac, iPhone or iPad and travels only between it and the servers you add. Two things are off unless you turn them on: keeping your list of servers in your own iCloud, and letting your iPhone reach servers by way of your own Mac. Both are described below.</p>
 </div>
 
-<h2>What the app stores, and where it stays</h2>
+<h2 id="what-the-app-stores-and-where-it-stays">What the app stores, and where it stays</h2>
 <p>On your device only:</p>
 <ul>
 <li>The servers you add: the name and tag you give them, their address and ports, and the user name.</li>
@@ -45,10 +67,10 @@
 </ul>
 <p>Event log entries are shown while you look at them and are not kept. Sensor readings are kept for one day, on your device only, so the app can show how a reading has moved; they are deleted when you remove the server. Unless you turn on iCloud sync (next section), the app does not upload, sync or share any of this. Deleting the app deletes it from your device.</p>
 
-<h2>iCloud sync of the server list (off unless you turn it on)</h2>
+<h2 id="icloud-sync-of-the-server-list-off-unless-you-turn-it-on">iCloud sync of the server list (off unless you turn it on)</h2>
 <p>If you turn on "Sync servers with iCloud" in Settings, the list of your servers is kept in your own iCloud account so your other devices have it: each server's name, address and ports, sign-in name, tags, protocol and certificate fingerprint. Apple stores it under your Apple Account and its terms; the developer cannot see it. Passwords are never synced: each device asks for a server's password once. The results of checks, sensor readings, event logs and the demo servers are not synced. Turning the setting off stops the syncing; what is already in your iCloud stays there until you remove the servers or delete the app's iCloud data in your device's iCloud settings.</p>
 
-<h2>What the app connects to</h2>
+<h2 id="what-the-app-connects-to">What the app connects to</h2>
 <ul>
 <li><strong>Your servers' management controllers (BMCs)</strong>, at the addresses you enter: over HTTPS for Redfish and over IPMI 2.0 (UDP port 623 unless you change it). Your user name and password are sent only to that address, and for Redfish only to the certificate you were shown when you added the server.</li>
 <li><strong>Apple</strong>, for purchases and to check what you have bought.</li>
@@ -57,42 +79,66 @@
 </ul>
 <p>Nothing else. There is no server run by the developer and nothing passes through one. The system asks for Local Network permission the first time the app reaches an address on your network; the app uses it only to reach the addresses you entered and, if you use the bridge, to find your Mac.</p>
 
-<h2>The Mac bridge (off unless you turn it on)</h2>
+<h2 id="the-mac-bridge-off-unless-you-turn-it-on">The Mac bridge (off unless you turn it on)</h2>
 <p>Cold Aisle on a Mac can carry your iPhone's or iPad's connections to your servers, for networks the phone cannot reach by itself. You switch it on on the Mac, which shows a pairing code, and type that code into the phone once. The two then talk only to each other, on your local network, encrypted with a key made from the code. The Mac passes connections on only to servers saved in its own list. For Redfish it carries the phone's own encrypted connection and never sees the server's password; IPMI traffic is already encrypted between the phone and the server. Nothing is stored on the Mac from what it carries, and none of it leaves your network.</p>
 
-<h2>Consoles and firmware</h2>
+<h2 id="consoles-and-firmware">Consoles and firmware</h2>
 <p>The serial console and the BMC's own web console are connections between your device and that server, like everything else. The web console keeps no cookies, and the app never types a saved password into the BMC's page. A firmware file you choose is read from where you keep it and sent only to the server you picked.</p>
 
 
-<h2>The widget and background refresh</h2>
+<h2 id="the-widget-and-background-refresh">The widget and background refresh</h2>
 <p>On iPhone and iPad, the Home Screen widget shows the result of the app's last check, which the app saves on your device for it. The widget itself does not use the network or read passwords. If you turn on background refresh in Settings, the app can check your servers while it is closed; for that, saved passwords become readable while the phone is locked after its first unlock. This is off unless you turn it on. On a Mac, the app checks your servers for as long as it is open, and its menu bar item shows the result.</p>
 
-<h2>Face ID and Touch ID</h2>
+<h2 id="face-id-and-touch-id">Face ID and Touch ID</h2>
 <p>If you turn on the app lock, the system checks your face, fingerprint, passcode or Mac password and tells the app only whether it passed. The app never sees or stores biometric data.</p>
 
-<h2>Device backups</h2>
+<h2 id="device-backups">Device backups</h2>
 <p>If you back up your device with iCloud Backup, Time Machine or to your computer, that backup includes the list of your servers and your settings, under Apple's terms. Passwords are not restored to a different device.</p>
 
-<h2>Purchases</h2>
+<h2 id="purchases">Purchases</h2>
 <p>Cold Aisle Pro is sold through Apple's in-app purchase. Apple handles the payment; the developer never sees your payment details. Apple gives developers sales totals that do not identify you.</p>
 
-<h2>Diagnostics from Apple</h2>
+<h2 id="diagnostics-from-apple">Diagnostics from Apple</h2>
 <p>The app contains no crash reporting or analytics code of its own. If you have chosen in your device's settings to share analytics with app developers, Apple may give the developer crash reports and usage totals that do not identify you.</p>
 
-<h2>Compatibility reports</h2>
+<h2 id="compatibility-reports">Compatibility reports</h2>
 <p>A server's Connection screen can make a short compatibility report: the maker and model of the board, its BMC and BIOS firmware versions, the protocol in use and which features work. It leaves out the server's name, address, ports, user name, serial number, host name, certificate and password. The app shows you the text and hands it to the system's share sheet; it never sends it anywhere by itself. If you send it to the developer, for example in a support issue, it is used only to make the app work with that kind of board.</p>
 
-<h2>Demo servers</h2>
+<h2 id="demo-servers">Demo servers</h2>
 <p>The built-in demo servers are simulated inside the app. Using them makes no network connection.</p>
 
-<h2>Children</h2>
+<h2 id="children">Children</h2>
 <p>The app is a tool for people who run servers and is not directed at children. It collects no data from anyone.</p>
 
-<h2>Changes</h2>
+<h2 id="changes">Changes</h2>
 <p>If this policy changes, the new version is posted on this page with a new date.</p>
 
-<h2>Contact</h2>
+<h2 id="contact">Contact</h2>
 <p>Questions about privacy: see the <a href="support.html">support page</a>.</p>
+</div>
+</div>
+</section>
 </main>
+<footer class="unit">
+<div class="foot">
+<div><a class="brand" href="./"><img src="img/icon-96.png" width="30" height="30" alt="">Cold Aisle</a>
+<p>A BMC client for IPMI and Redfish, coming to iPhone, iPad and Mac.</p></div>
+<div><h2 class="eng">Free tools</h2><ul>
+<li><a href="decode/">Event decoder</a></li>
+<li><a href="ipmitool/">ipmitool cheat sheet</a></li>
+<li><a href="3am/">3 a.m. checklist</a></li>
+</ul></div>
+<div><h2 class="eng">Help</h2><ul>
+<li><a href="support.html">Support</a></li>
+<li><a href="privacy.html">Privacy Policy</a></li>
+</ul></div>
+<div><h2 class="eng">Hear about the launch</h2><ul>
+<li><a href="feed.xml">Atom feed</a></li>
+</ul><p>No email list and no tracking. Add the feed to your reader.</p></div>
+</div>
+</footer>
+</div>
+<div class="rail r" aria-hidden="true"></div>
+</div>
 </body>
 </html>

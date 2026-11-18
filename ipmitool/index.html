@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
+<title>ipmitool and Redfish cheat sheet | Cold Aisle</title>
+<meta name="description" content="The ipmitool commands and matching Redfish curl calls for an outage: power, sensors, the event log, identify, serial over LAN, BMC network and BMC reset.">
+<link rel="canonical" href="https://coldaisle.dev/ipmitool/">
+<meta property="og:title" content="ipmitool and Redfish cheat sheet | Cold Aisle">
+<meta property="og:description" content="The ipmitool commands and matching Redfish curl calls for an outage: power, sensors, the event log, identify, serial over LAN, BMC network and BMC reset.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://coldaisle.dev/ipmitool/">
+<meta property="og:image" content="https://coldaisle.dev/img/og-ipmitool.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="ipmitool and Redfish cheat sheet | Cold Aisle">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ipmitool and Redfish cheat sheet | Cold Aisle">
+<meta name="twitter:description" content="The ipmitool commands and matching Redfish curl calls for an outage: power, sensors, the event log, identify, serial over LAN, BMC network and BMC reset.">
+<meta name="twitter:image" content="https://coldaisle.dev/img/og-ipmitool.jpg">
+<meta name="theme-color" content="#0b151d">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+<link rel="alternate" type="application/atom+xml" title="Cold Aisle news" href="../feed.xml">
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<svg class="sprite" aria-hidden="true" focusable="false">
+<defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#ff7a2e" fill-opacity=".16"/><path d="M0 0V5" stroke="#ff7a2e" stroke-width="1.6"/></pattern></defs>
+<symbol id="l-ok" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="currentColor"/><path d="M6.2 11.4l3.2 3.2 6.4-7" fill="none" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+<symbol id="l-warn" viewBox="0 0 22 22"><path d="M11 1.8 21.2 19.6a.9.9 0 0 1-.8 1.4H1.6a.9.9 0 0 1-.8-1.4z" fill="currentColor"/><path d="M11 8v6" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round"/><circle cx="11" cy="17.4" r="1.4" fill="#0b151d"/></symbol>
+<symbol id="l-fault" viewBox="0 0 22 22"><path d="M7 1h8l6 6v8l-6 6H7l-6-6V7z" fill="currentColor"/><path d="M7.5 7.5l7 7m0-7l-7 7" stroke="#0b151d" stroke-width="2.3" stroke-linecap="round"/></symbol>
+<symbol id="l-id" viewBox="0 0 22 22"><circle cx="11" cy="11" r="10" fill="currentColor"/><path d="M11 5a4.2 4.2 0 0 0-2.5 7.6c.5.4.7.9.7 1.4h3.6c0-.5.2-1 .7-1.4A4.2 4.2 0 0 0 11 5zM9.4 15.6h3.2V17H9.4z" fill="#0b151d"/></symbol>
+<symbol id="l-none" viewBox="0 0 22 22"><circle cx="11" cy="11" r="9.6" fill="#1e2c37" stroke="currentColor" stroke-width="1.6"/><path d="M7 11h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></symbol>
+</svg>
+<div class="rack">
+<div class="rail" aria-hidden="true"></div>
+<div class="bay">
+<header class="unit">
+<nav class="mast" aria-label="Main">
+<a class="brand" href="../"><img src="../img/icon-96.png" width="30" height="30" alt="">Cold Aisle</a>
+<ul><li><a href="../decode/">Decoder</a></li><li><a href="../ipmitool/" aria-current="page">ipmitool</a></li><li><a href="../3am/">3 a.m.</a></li><li><a href="../support.html">Support</a></li></ul>
+</nav>
+</header>
+<main id="main">
+<section class="unit">
+<div class="head">
+<p class="eng">Free tool</p>
+<h1 class="page">ipmitool and Redfish, for when it's already gone wrong.</h1>
+<p class="lead">The commands a technician reaches for during an outage. Run the setup once, then copy what you need. Options and paths differ by maker and firmware.</p>
+<div class="cmd setup"><pre>export BMC=10.0.8.15 BMC_USER=admin
+read -rs IPMI_PASSWORD; export IPMI_PASSWORD
+
+ipmi() { ipmitool -I lanplus -H "$BMC" -U "$BMC_USER" -E "$@"; }
+rf()   { curl -sk -u "$BMC_USER:$IPMI_PASSWORD" -H 'Content-Type: application/json' "$@"; }
+
+# Redfish paths differ by maker. List yours, then set these.
+rf "https://$BMC/redfish/v1/Systems" | jq -r '.Members[]."@odata.id"'
+SYS=/redfish/v1/Systems/1 CHS=/redfish/v1/Chassis/1 MGR=/redfish/v1/Managers/1 LOG=SEL</pre><button class="copy" type="button" hidden aria-label="Copy the setup">Copy</button></div>
+<p class="note">-E reads the password from IPMI_PASSWORD. curl -k skips the certificate check because BMCs usually have self-signed certificates, so keep this on your management network. Redfish lines need jq.</p>
+<ul class="toc"><li><a href="#power">Power</a></li><li><a href="#sensors">Sensors</a></li><li><a href="#sel">Event log</a></li><li><a href="#identify">Identify light</a></li><li><a href="#sol">Serial over LAN</a></li><li><a href="#lan">BMC network</a></li><li><a href="#bmc">The BMC itself</a></li></ul>
+</div>
+</section>
+<section class="unit" id="power" aria-labelledby="h-power">
+<div class="plate"><h2 class="eng" id="h-power">Power</h2></div>
+<div class="rows"><div class="rows-h" aria-hidden="true"><span class="eng">Task</span><span class="eng">ipmitool</span><span class="eng">Redfish</span></div>
+<div class="row"><div><h3>Is it on?</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis power status</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$SYS" | jq -r .PowerState</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>Chassis state and faults</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis status</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$SYS" | jq '{PowerState, Status}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>Why did it last restart?</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis restart_cause</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+<div class="row"><div><h3>Which reset types does this BMC allow?</h3></div><div><span class="eng tag">ipmitool</span><span class="none">No direct equivalent</span></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$SYS" | jq '.Actions."#ComputerSystem.Reset"'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>Power on</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis power on</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X POST "https://$BMC$SYS/Actions/ComputerSystem.Reset" -d '{"ResetType":"On"}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row danger"><div><h3>Clean shutdown</h3><p>Asks the OS to shut down. A hung OS will not answer.</p><span class="flag"><svg class="lamp s l-fault" aria-hidden="true"><use href="#l-fault"/></svg>Destructive</span><p>Stops every service on the host.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis power soft</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X POST "https://$BMC$SYS/Actions/ComputerSystem.Reset" -d '{"ResetType":"GracefulShutdown"}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row danger"><div><h3>Power cycle</h3><p>Cuts power, waits, powers back on.</p><span class="flag"><svg class="lamp s l-fault" aria-hidden="true"><use href="#l-fault"/></svg>Destructive</span><p>Anything unsaved on the server is lost.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis power cycle</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X POST "https://$BMC$SYS/Actions/ComputerSystem.Reset" -d '{"ResetType":"PowerCycle"}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row danger"><div><h3>Hard reset</h3><p>Restarts without cutting power.</p><span class="flag"><svg class="lamp s l-fault" aria-hidden="true"><use href="#l-fault"/></svg>Destructive</span><p>Anything unsaved on the server is lost.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis power reset</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X POST "https://$BMC$SYS/Actions/ComputerSystem.Reset" -d '{"ResetType":"ForceRestart"}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row danger"><div><h3>Force off</h3><p>Stays off until someone powers it on.</p><span class="flag"><svg class="lamp s l-fault" aria-hidden="true"><use href="#l-fault"/></svg>Destructive</span><p>Anything unsaved on the server is lost.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis power off</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X POST "https://$BMC$SYS/Actions/ComputerSystem.Reset" -d '{"ResetType":"ForceOff"}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+</div>
+</section>
+<section class="unit" id="sensors" aria-labelledby="h-sensors">
+<div class="plate"><h2 class="eng" id="h-sensors">Sensors</h2></div>
+<div class="rows"><div class="rows-h" aria-hidden="true"><span class="eng">Task</span><span class="eng">ipmitool</span><span class="eng">Redfish</span></div>
+<div class="row"><div><h3>Every sensor, with its state</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sdr elist</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+<div class="row"><div><h3>Readings and thresholds</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sensor list</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+<div class="row"><div><h3>Temperatures</h3><p>Newer firmware may move Thermal and Power to ThermalSubsystem and PowerSubsystem.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sdr type Temperature</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$CHS/Thermal" | jq '.Temperatures[] | {Name, ReadingCelsius, Status}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>Fans</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sdr type Fan</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$CHS/Thermal" | jq '.Fans[] | {Name, Reading, ReadingUnits, Status}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>Power supplies</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sdr type "Power Supply"</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$CHS/Power" | jq '.PowerSupplies[] | {Name, Status}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+</div>
+</section>
+<section class="unit" id="sel" aria-labelledby="h-sel">
+<div class="plate"><h2 class="eng" id="h-sel">Event log</h2></div>
+<div class="rows"><div class="rows-h" aria-hidden="true"><span class="eng">Task</span><span class="eng">ipmitool</span><span class="eng">Redfish</span></div>
+<div class="row"><div><h3>How full is the log?</h3><p>For Redfish, list the log services first. Some makers keep the log under $MGR instead of $SYS.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sel info</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$SYS/LogServices" | jq -r '.Members[]."@odata.id"'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>The last 30 events</h3><p>Set LOG to the name your BMC gives its log service.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sel elist last 30</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$SYS/LogServices/$LOG/Entries" | jq '.Members[] | {Created, Severity, Message}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>Save the whole log to a file</h3><p>Do this before you clear anything.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sel elist &gt; "sel-$BMC-$(date +%F).txt"</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$SYS/LogServices/$LOG/Entries" &gt; "sel-$BMC-$(date +%F).json"</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>One raw record, for the decoder</h3><p>Record ID 1. Drop the first two bytes of the reply. <a href="../decode/">Paste the rest into the decoder.</a></p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi raw 0x0a 0x43 0x00 0x00 0x01 0x00 0x00 0xff</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+<div class="row danger"><div><h3>Clear the log</h3><span class="flag"><svg class="lamp s l-fault" aria-hidden="true"><use href="#l-fault"/></svg>Destructive</span><p>Cannot be undone. Save the log first.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sel clear</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X POST "https://$BMC$SYS/LogServices/$LOG/Actions/LogService.ClearLog" -d '{}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+</div>
+</section>
+<section class="unit" id="identify" aria-labelledby="h-identify">
+<div class="plate"><h2 class="eng" id="h-identify">Identify light</h2></div>
+<div class="rows"><div class="rows-h" aria-hidden="true"><span class="eng">Task</span><span class="eng">ipmitool</span><span class="eng">Redfish</span></div>
+<div class="row"><div><h3>Blink for 60 seconds</h3><p>Redfish keeps it on until you turn it off. Older firmware uses {"IndicatorLED":"Blinking"} instead.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis identify 60</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X PATCH "https://$BMC$SYS" -d '{"LocationIndicatorActive":true}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>Turn it off</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi chassis identify 0</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X PATCH "https://$BMC$SYS" -d '{"LocationIndicatorActive":false}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+</div>
+</section>
+<section class="unit" id="sol" aria-labelledby="h-sol">
+<div class="plate"><h2 class="eng" id="h-sol">Serial over LAN</h2></div>
+<div class="rows"><div class="rows-h" aria-hidden="true"><span class="eng">Task</span><span class="eng">ipmitool</span><span class="eng">Redfish</span></div>
+<div class="row"><div><h3>Open the console</h3><p>End the session with ~. at the start of a line. Inside SSH, type ~~. instead.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sol activate</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+<div class="row"><div><h3>Free a session someone left open</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sol deactivate</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+<div class="row"><div><h3>Read the serial settings</h3><p>Redfish has no standard call for a serial session. Use ipmitool here.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi sol info 1</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+</div>
+</section>
+<section class="unit" id="lan" aria-labelledby="h-lan">
+<div class="plate"><h2 class="eng" id="h-lan">BMC network</h2></div>
+<div class="rows"><div class="rows-h" aria-hidden="true"><span class="eng">Task</span><span class="eng">ipmitool</span><span class="eng">Redfish</span></div>
+<div class="row"><div><h3>Read the network settings</h3><p>LAN channel 1 is common, not universal.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi lan print 1</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$MGR/EthernetInterfaces" | jq -r '.Members[]."@odata.id"'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>List BMC users</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi user list 1</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC/redfish/v1/AccountService/Accounts" | jq -r '.Members[]."@odata.id"'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row danger"><div><h3>Set a static address</h3><p>Safer from the host itself: ipmitool -I open lan set 1 ...</p><span class="flag"><svg class="lamp s l-fault" aria-hidden="true"><use href="#l-fault"/></svg>Destructive</span><p>Over the network, this can cut you off from the BMC.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi lan set 1 ipsrc static
+ipmi lan set 1 ipaddr 10.0.8.20
+ipmi lan set 1 netmask 255.255.255.0
+ipmi lan set 1 defgw ipaddr 10.0.8.1</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+</div>
+</section>
+<section class="unit" id="bmc" aria-labelledby="h-bmc">
+<div class="plate"><h2 class="eng" id="h-bmc">The BMC itself</h2></div>
+<div class="rows"><div class="rows-h" aria-hidden="true"><span class="eng">Task</span><span class="eng">ipmitool</span><span class="eng">Redfish</span></div>
+<div class="row"><div><h3>Firmware and model</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi mc info</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$MGR" | jq '{Model, FirmwareVersion, Status}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row"><div><h3>Self test</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi mc selftest</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><span class="none">No direct equivalent</span></div></div>
+<div class="row"><div><h3>Maker, model and serial number</h3></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi fru print 0</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf "https://$BMC$SYS" | jq '{Manufacturer, Model, SerialNumber}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+<div class="row danger"><div><h3>Restart the BMC</h3><p>The server keeps running. The BMC drops off the network while it restarts.</p><span class="flag"><svg class="lamp s l-fault" aria-hidden="true"><use href="#l-fault"/></svg>Destructive</span><p>You lose the BMC until it comes back.</p></div><div><span class="eng tag">ipmitool</span><div class="cmd"><pre>ipmi mc reset cold</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div><div><span class="eng tag">Redfish</span><div class="cmd"><pre>rf -X POST "https://$BMC$MGR/Actions/Manager.Reset" -d '{"ResetType":"GracefulRestart"}'</pre><button class="copy" type="button" hidden aria-label="Copy this command">Copy</button></div></div></div>
+</div>
+</section>
+
+</main>
+<footer class="unit">
+<div class="foot">
+<div><a class="brand" href="../"><img src="../img/icon-96.png" width="30" height="30" alt="">Cold Aisle</a>
+<p>A BMC client for IPMI and Redfish, coming to iPhone, iPad and Mac.</p></div>
+<div><h2 class="eng">Free tools</h2><ul>
+<li><a href="../decode/">Event decoder</a></li>
+<li><a href="../ipmitool/">ipmitool cheat sheet</a></li>
+<li><a href="../3am/">3 a.m. checklist</a></li>
+</ul></div>
+<div><h2 class="eng">Help</h2><ul>
+<li><a href="../support.html">Support</a></li>
+<li><a href="../privacy.html">Privacy Policy</a></li>
+</ul></div>
+<div><h2 class="eng">Hear about the launch</h2><ul>
+<li><a href="../feed.xml">Atom feed</a></li>
+</ul><p>No email list and no tracking. Add the feed to your reader.</p></div>
+</div>
+</footer>
+</div>
+<div class="rail r" aria-hidden="true"></div>
+</div>
+<script src="../js/copy.js"></script>
+</body>
+</html>

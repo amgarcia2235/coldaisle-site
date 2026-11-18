@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<title>Cold Aisle</title>
+<subtitle>News about Cold Aisle, a BMC client for IPMI and Redfish.</subtitle>
+<id>https://coldaisle.dev/feed.xml</id>
+<link rel="self" type="application/atom+xml" href="https://coldaisle.dev/feed.xml"/>
+<link rel="alternate" type="text/html" href="https://coldaisle.dev/"/>
+<updated>2026-11-17T12:00:00Z</updated>
+<author><name>Cold Aisle</name></author>
+<entry>
+<title>Cold Aisle 1.0 is in App Review</title>
+<id>https://coldaisle.dev/feed.xml#1.0-in-app-review</id>
+<link rel="alternate" type="text/html" href="https://coldaisle.dev/"/>
+<published>2026-11-17T12:00:00Z</published>
+<updated>2026-11-17T12:00:00Z</updated>
+<summary>Cold Aisle 1.0, for iPhone, iPad and Mac, is in App Review. The next entry in this feed will say when it is available.</summary>
+</entry>
+</feed>

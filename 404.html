@@ -3,14 +3,16 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; img-src 'self' data:; style-src 'self'; script-src 'self'; base-uri 'none'; form-action 'none'">
 <title>No reply at this address | Cold Aisle</title>
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#0b151d">
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="alternate" type="application/atom+xml" title="Cold Aisle news" href="/feed.xml">
 <link rel="stylesheet" href="/style.css">
 </head>
-<body class="face">
+<body>
 <a class="skip" href="#main">Skip to content</a>
 <svg class="sprite" aria-hidden="true" focusable="false">
 <defs><pattern id="hatch" width="5" height="5" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="5" height="5" fill="#ff7a2e" fill-opacity=".16"/><path d="M0 0V5" stroke="#ff7a2e" stroke-width="1.6"/></pattern></defs>
@@ -26,19 +28,55 @@
 <header class="unit">
 <nav class="mast" aria-label="Main">
 <a class="brand" href="/"><img src="/img/icon-96.png" width="30" height="30" alt="">Cold Aisle</a>
-<ul><li><a href="/support.html">Support</a></li><li><a href="/privacy.html">Privacy</a></li></ul>
+<ul><li><a href="/decode/">Decoder</a></li><li><a href="/ipmitool/">ipmitool</a></li><li><a href="/3am/">3 a.m.</a></li><li><a href="/support.html">Support</a></li></ul>
 </nav>
 </header>
-<main id="main" class="unit">
+<main id="main">
+<section class="unit">
 <div class="nf">
+<div>
 <p class="bigname" aria-hidden="true">404</p>
 <h1>No reply at this address.</h1>
-<p class="verdict" style="padding:16px 0 0;border:0"><svg class="lamp s l-none" aria-hidden="true"><use href="#l-none"/></svg>This page doesn't exist, or it moved.</p>
-<p class="body"><a href="/">Back to Cold Aisle</a></p>
+<p class="lead">This page is down. The site is still reachable.</p>
+<ul class="toc">
+<li><a href="/">Home</a></li>
+<li><a href="/decode/">Event decoder</a></li>
+<li><a href="/ipmitool/">ipmitool cheat sheet</a></li>
+<li><a href="/3am/">3 a.m. checklist</a></li>
+<li><a href="/support.html">Support</a></li>
+</ul>
 </div>
+<div class="panel">
+<div class="panel-id"><span class="eng">Front panel</span><code>coldaisle.dev</code></div>
+<ul class="lamps">
+<li><span class="eng">This page</span><span class="big"><svg class="lamp  l-none" aria-hidden="true"><use href="#l-none"/></svg></span><span class="word">No reply</span></li>
+<li><span class="eng">The site</span><span class="big"><svg class="lamp  l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg></span><span class="word awake">Awake</span></li>
+</ul>
+<div class="panel-foot"><p class="verdict"><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span>You still have a way in.</span></p></div>
+</div>
+</div>
+</section>
 </main>
+<footer class="unit">
+<div class="foot">
+<div><a class="brand" href="/"><img src="/img/icon-96.png" width="30" height="30" alt="">Cold Aisle</a>
+<p>A BMC client for IPMI and Redfish, coming to iPhone, iPad and Mac.</p></div>
+<div><h2 class="eng">Free tools</h2><ul>
+<li><a href="/decode/">Event decoder</a></li>
+<li><a href="/ipmitool/">ipmitool cheat sheet</a></li>
+<li><a href="/3am/">3 a.m. checklist</a></li>
+</ul></div>
+<div><h2 class="eng">Help</h2><ul>
+<li><a href="/support.html">Support</a></li>
+<li><a href="/privacy.html">Privacy Policy</a></li>
+</ul></div>
+<div><h2 class="eng">Hear about the launch</h2><ul>
+<li><a href="/feed.xml">Atom feed</a></li>
+</ul><p>No email list and no tracking. Add the feed to your reader.</p></div>
 </div>
-<div class="rail" aria-hidden="true"></div>
+</footer>
+</div>
+<div class="rail r" aria-hidden="true"></div>
 </div>
 </body>
 </html>

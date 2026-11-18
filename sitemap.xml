@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url><loc>https://coldaisle.dev/</loc></url>
+<url><loc>https://coldaisle.dev/decode/</loc></url>
+<url><loc>https://coldaisle.dev/ipmitool/</loc></url>
+<url><loc>https://coldaisle.dev/3am/</loc></url>
 <url><loc>https://coldaisle.dev/support.html</loc></url>
 <url><loc>https://coldaisle.dev/privacy.html</loc></url>
 </urlset>
