@@ -49,7 +49,7 @@
 <div class="top">
 <p class="eng kick">BMC client for IPMI 2.0 and Redfish</p>
 <h1><span class="dim">Server down?</span> <span>Still reachable.</span></h1>
-<p class="what">Cold Aisle is a BMC client for IPMI and Redfish, on iPhone, iPad and Mac. The BMC is the small computer on your server board that stays awake as long as the machine has power, even when the OS is hung, shut down, or not installed yet.</p>
+<p class="what">Cold Aisle talks to your servers' BMCs from an iPhone, iPad or Mac. The BMC is the small computer on the server board that stays up as long as the box has power, even when the OS is hung, shut down or not installed yet.</p>
 </div>
 <div class="panel" id="panel">
 <div class="panel-id"><span class="eng">Front panel</span><code>colo-r64</code></div>
@@ -60,7 +60,7 @@
 <li><span class="eng">BMC</span><span class="big"><svg class="lamp  l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg></span><span class="word awake">Awake</span></li>
 </ul>
 <div class="panel-foot">
-<p class="verdict" aria-live="polite"><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span id="say">The OS is gone. The BMC still answers. You still have a way in.</span></p>
+<p class="verdict" aria-live="polite"><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span id="say">The OS is gone, but the BMC still answers, so you still have a way in.</span></p>
 <button class="btn go" id="hang" type="button" hidden>Hang the OS</button>
 </div>
 </div>
@@ -77,7 +77,7 @@
 <div class="plate" aria-hidden="true"><span class="eng">Free tools</span><span class="eng">U40</span></div>
 <div class="sec tight">
 <div>
-<h2 id="h-tools">Useful in an outage, with or without the app.</h2>
+<h2 id="h-tools">Free tools for an outage. You don't need the app.</h2>
 <ul class="ports">
 <li><a href="decode/"><span class="jack" aria-hidden="true">1</span><b>Event decoder</b><span class="d">Paste raw IPMI event records or SEL lines and read them in plain English. Nothing leaves your browser.</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
 <li><a href="ipmitool/"><span class="jack" aria-hidden="true">2</span><b>ipmitool cheat sheet</b><span class="d">Power, sensors, the event log, serial over LAN and BMC resets, with the matching Redfish calls.</span><span class="arrow" aria-hidden="true">&rarr;</span></a></li>
@@ -92,7 +92,7 @@
 <div class="sec tight c-5-7">
 <div>
 <h2 id="h-screens">There's nothing in the middle.</h2>
-<p class="body">No agent on the server, no account, no server of ours. The app connects to your BMCs directly, or through your own Mac running Cold Aisle if you turn that on, and it doesn't collect anything.</p>
+<p class="body">Nothing to install on the server, no account, and no server of ours. The app talks to your BMCs directly, or through your own Mac running Cold Aisle if you turn that on. It doesn't collect anything.</p>
 <p class="body">It uses Redfish where the server has it and falls back to IPMI where it doesn't.</p>
 </div>
 <div class="screens">
@@ -125,8 +125,8 @@
 <div>
 <h3 class="eng free-h">Where BMC tools usually let you down</h3>
 <dl class="answers">
-<div><dt>Locked to one brand</dt><dd>Cold Aisle speaks both IPMI 2.0 and Redfish, so Supermicro, Dell iDRAC, HPE iLO, ASRock Rack and others can all sit in the same list.</dd></div>
-<div><dt>Certificates and sign-in</dt><dd>You see a Redfish server's certificate before you type a password. Self-signed certificates get pinned the first time and checked every time after. The app tells you what works on each server.</dd></div>
+<div><dt>Locked to one brand</dt><dd>Cold Aisle speaks IPMI 2.0 and Redfish, so Supermicro, Dell iDRAC, HPE iLO, ASRock Rack and other boards can sit in the same list.</dd></div>
+<div><dt>Certificates and sign-in</dt><dd>You see a Redfish server's certificate before you type a password. A self-signed one gets pinned the first time and checked on every connection after that. Each server also shows you what works on it and what doesn't.</dd></div>
 <div><dt>Older boards left behind</dt><dd>Older or second-hand boards without a Redfish license work fine over IPMI.</dd></div>
 </dl>
 </div>
@@ -138,7 +138,7 @@
 <div class="sec tight c-7-5">
 <div>
 <h2 id="h-sens">Every reading, against the limits the board reports.</h2>
-<p class="body">Temperatures, fans, voltages and power supplies, with anything out of range at the top. See how each temperature and fan has moved over the last day.</p>
+<p class="body">Temperatures, fans, voltages and power supplies, with anything out of range at the top. Each temperature and fan also shows where it's been over the last day.</p>
 <ul class="sens" aria-label="Example sensor readings">
 <li><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span class="n">CPU1 Temp</span><span class="scale-c"><svg class="scale" viewBox="0 0 420 26" aria-hidden="true"><rect x="340.0" y="6" width="40.0" height="12" fill="url(#hatch)"/><rect x="380.0" y="6" width="40.0" height="12" fill="#ff6b7a"/><path d="M0 18H420" stroke="#6f8391"/><path d="M21.4 13V18M42.4 13V18M63.4 13V18M84.3 13V18M126.2 13V18M147.2 13V18M168.1 13V18M189.1 13V18M230.9 13V18M251.9 13V18M272.9 13V18M293.8 13V18M335.7 13V18M356.6 13V18M377.6 13V18M398.6 13V18" stroke="#34495a"/><path d="M0.5 6V18M105.2 6V18M210.0 6V18M314.8 6V18M419.5 6V18" stroke="#6f8391"/><path d="M176.0 20V23H208.0V20" fill="none" stroke="#8ea2b1" stroke-width="1.6"/><path d="M192.0 5V19" stroke="#d6e2ea" stroke-width="2.4"/><path d="M187.0 0h10l-5 6z" fill="#d6e2ea"/></svg></span><span class="v">48<small>°C</small><span class="vh">, in range</span></span></li>
 <li><svg class="lamp s l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg><span class="n">Inlet Temp</span><span class="scale-c"><svg class="scale" viewBox="0 0 420 26" aria-hidden="true"><rect x="336.0" y="6" width="42.0" height="12" fill="url(#hatch)"/><rect x="378.0" y="6" width="42.0" height="12" fill="#ff6b7a"/><path d="M0 18H420" stroke="#6f8391"/><path d="M21.4 13V18M42.4 13V18M63.4 13V18M84.3 13V18M126.2 13V18M147.2 13V18M168.1 13V18M189.1 13V18M230.9 13V18M251.9 13V18M272.9 13V18M293.8 13V18M335.7 13V18M356.6 13V18M377.6 13V18M398.6 13V18" stroke="#34495a"/><path d="M0.5 6V18M105.2 6V18M210.0 6V18M314.8 6V18M419.5 6V18" stroke="#6f8391"/><path d="M176.4 20V23H218.4V20" fill="none" stroke="#8ea2b1" stroke-width="1.6"/><path d="M201.6 5V19" stroke="#d6e2ea" stroke-width="2.4"/><path d="M196.6 0h10l-5 6z" fill="#d6e2ea"/></svg></span><span class="v">24<small>°C</small><span class="vh">, in range</span></span></li>
@@ -163,8 +163,8 @@
 <div class="sec tight c-5-7">
 <div>
 <h2 id="h-log">The hardware event log, in plain English.</h2>
-<p class="body">The raw detail is one tap away if you want it. On the Mac, click an event to see what it usually means and what to try, or paste raw log lines from a ticket or a terminal and read them the same way.</p>
-<p class="body">Copy a server's state as text and paste it straight into a ticket.</p>
+<p class="body">The raw bytes are one tap away if you want them. On the Mac, click an event to see what it usually means and what to try. You can also paste raw log lines from a ticket or a terminal and read them the same way.</p>
+<p class="body">When you're done, copy the server's state as text and paste it into the ticket.</p>
 <p class="body"><a href="decode/">Try the same decoder in your browser</a></p>
 </div>
 <figure><img class="win" src="img/mac-log-reader.jpg" width="1100" height="965" loading="lazy" alt="The Read a Log window on the Mac: three pasted raw log lines decoded into a fan fault, a correctable memory error and a power button press, with what the fault usually means and what to try."></figure>
@@ -191,13 +191,13 @@
 <div class="plate" aria-hidden="true"><span class="eng">Mac, iPad, iPhone</span><span class="eng">U16</span></div>
 <div class="sec tight c-6-6">
 <div>
-<h2 id="h-mac">Your whole fleet fits in one window.</h2>
-<p class="body">Every server sits in a sidebar, grouped by tag, with its state shown as a shape as well as a color, so you never have to rely on color alone.</p>
+<h2 id="h-mac">All your servers in one window.</h2>
+<p class="body">Servers sit in a sidebar, grouped by tag. Each state has its own shape as well as a color, so you can read it without relying on color.</p>
 <ul class="shapes" aria-label="Status shapes"><li><svg class="lamp  l-ok glow" aria-hidden="true"><use href="#l-ok"/></svg>Green disc</li><li><svg class="lamp  l-warn glow" aria-hidden="true"><use href="#l-warn"/></svg>Orange triangle</li><li><svg class="lamp  l-fault glow" aria-hidden="true"><use href="#l-fault"/></svg>Crimson octagon</li></ul>
 <ul class="ticks">
 <li><b>Menu bar.</b> The icon is a little rack while everything's fine and changes shape when something needs you.</li>
 <li><b>Windows.</b> Pop any server into its own window to keep a few side by side.</li>
-<li><b>Bulk add.</b> Paste a list to add a lot of servers at once.</li>
+<li><b>Bulk add.</b> Paste a list to add a batch of servers at once.</li>
 <li><b>Serial console.</b> Serial over LAN for firmware setup, the boot loader or a serial login.</li>
 <li><b>Web console.</b> The BMC's own web console in a window, which only loads for the certificate you pinned.</li>
 <li><b>Home Screen.</b> On iPhone and iPad, keep the servers you care about on a widget.</li>
@@ -222,7 +222,7 @@
 <tr><th scope="row">Redfish certificates</th><td>If a pinned certificate ever changes, the app stops and tells you.</td></tr>
 <tr><th scope="row">IPMI sessions</th><td>Only signs in with authentication and encryption on. It never uses the unprotected mode some BMCs still allow.</td></tr>
 <tr><th scope="row">App lock</th><td>Face ID or Touch ID.</td></tr>
-<tr><th scope="row">No hardware handy</th><td>Four demo servers are built in, so you can poke around every screen first.</td></tr>
+<tr><th scope="row">No hardware handy</th><td>Four demo servers are built in, so you can try every screen before you point it at real hardware.</td></tr>
 </tbody></table>
 </div>
 <div>
@@ -240,7 +240,7 @@
 <tr><th scope="row">Home Screen widget</th><td class="m"><svg class="lamp s l-none" aria-hidden="true"><use href="#l-none"/></svg><span class="vh">Not included</span></td><td class="m"><svg class="lamp s l-ok" aria-hidden="true"><use href="#l-ok"/></svg><span class="vh">Included</span></td></tr>
 </tbody>
 </table>
-<p class="note">Pay monthly, yearly or once. All three unlock the same things. One purchase covers your Mac, iPhone and iPad.</p>
+<p class="note">Pay monthly, yearly or once. You get the same features either way, and one purchase covers your Mac, iPhone and iPad.</p>
 <div class="limits">
 <h3 class="eng">What it doesn't do</h3>
 <p>There's no built-in graphical KVM. For that, the app opens the BMC's own web console.</p>

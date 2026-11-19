@@ -50,25 +50,25 @@
 <p class="eng">Support</p>
 <h1 class="page" id="content" tabindex="-1">What's going wrong?</h1>
 <p class="lead">Help for Cold Aisle on iPhone, iPad and Mac. Pick the symptom.</p>
-<ul class="symptoms"><li><a href="#cant-reach">The app can't reach my server</a></li><li><a href="#sign-in">Sign-in fails</a></li><li><a href="#certificate">It says the certificate changed</a></li><li><a href="#missing">Sensors or the event log are missing</a></li><li><a href="#power-actions">Power buttons don't work</a></li><li><a href="#consoles">The console will not open</a></li><li><a href="#widget">The widget is out of date</a></li><li><a href="#purchases">Pro and purchases</a></li></ul>
+<ul class="symptoms"><li><a href="#cant-reach">The app can't reach my server</a></li><li><a href="#sign-in">Sign-in fails</a></li><li><a href="#certificate">It says the certificate changed</a></li><li><a href="#missing">Sensors or the event log are missing</a></li><li><a href="#power-actions">Power buttons don't work</a></li><li><a href="#consoles">The console won't open</a></li><li><a href="#widget">The widget is out of date</a></li><li><a href="#purchases">Pro and purchases</a></li></ul>
 </div>
 </section>
 <section class="unit">
 <div class="doc">
-<nav class="side" aria-label="On this page"><h2 class="eng">On this page</h2><ul><li><a href="#contact">Get in touch</a></li><li><a href="#start">Getting started</a></li><li><a href="#cant-reach">The app can't reach my server</a></li><li><a href="#sign-in">Sign-in fails</a></li><li><a href="#certificate">It says the certificate changed</a></li><li><a href="#missing">Sensors or the event log are missing</a></li><li><a href="#power-actions">Power buttons don't work</a></li><li><a href="#consoles">The console will not open</a></li><li><a href="#widget">The widget is out of date</a></li><li><a href="#purchases">Pro and purchases</a></li><li><a href="#compat">Help the app work with your board</a></li><li><a href="#limits">What it does not do</a></li></ul></nav>
+<nav class="side" aria-label="On this page"><h2 class="eng">On this page</h2><ul><li><a href="#contact">Get in touch</a></li><li><a href="#start">Getting started</a></li><li><a href="#cant-reach">The app can't reach my server</a></li><li><a href="#sign-in">Sign-in fails</a></li><li><a href="#certificate">It says the certificate changed</a></li><li><a href="#missing">Sensors or the event log are missing</a></li><li><a href="#power-actions">Power buttons don't work</a></li><li><a href="#consoles">The console won't open</a></li><li><a href="#widget">The widget is out of date</a></li><li><a href="#purchases">Pro and purchases</a></li><li><a href="#compat">Help the app work with your board</a></li><li><a href="#limits">What it doesn't do</a></li></ul></nav>
 <div class="prose">
 <section id="contact">
 <h2>Get in touch</h2>
 <p>Most answers are on this page. For anything else, open an issue at <a href="https://github.com/amgarcia2235/coldaisle-site/issues">github.com/amgarcia2235/coldaisle-site/issues</a>. We reply within 48 hours.</p>
-<div class="warn"><svg class="lamp s l-warn glow" aria-hidden="true"><use href="#l-warn"/></svg><p>Issues are public. Please do not post passwords, server addresses, serial numbers or host names there. Saying which board and which BMC firmware version you have is enough to start.</p></div>
+<div class="warn"><svg class="lamp s l-warn glow" aria-hidden="true"><use href="#l-warn"/></svg><p>Issues are public, so please don't post passwords, server addresses, serial numbers or host names there. Saying which board and which BMC firmware version you have is enough to start.</p></div>
 </section>
 <section id="start">
 <h2>Getting started</h2>
 <ol>
-<li>Want to look around first? On the empty Servers screen tap <em>Try it with demo servers</em>, or turn on Settings &gt; Demo servers. Four simulated servers appear; nothing they do touches the network.</li>
+<li>Want to look around first? On the empty Servers screen tap <em>Try it with demo servers</em>, or turn on Settings &gt; Demo servers. Four simulated servers show up, and nothing they do touches the network.</li>
 <li>To add a real server, tap + and enter the address of its management controller (BMC). This is the BMC's own address, not the address of the operating system.</li>
 <li>The app tries Redfish first, then IPMI. For Redfish it shows you the fingerprint of the server's certificate before you type a password; compare it with the BMC's web page if you can.</li>
-<li>Enter the BMC user name and password. They are stored in the Keychain on this device only.</li>
+<li>Enter the BMC user name and password. They're stored in the Keychain on this device only.</li>
 </ol>
 <p>Your iPhone, iPad or Mac must be able to reach the BMC's address: on the same network, through a remote-access connection into the management network, or through your own Mac.</p>
 </section>
@@ -76,33 +76,33 @@
 <h2>The app can't reach my server</h2>
 <ul>
 <li>Check that the device is on the management network or has a remote-access connection into it. Opening the BMC's web page in a browser on the same device is a quick test.</li>
-<li>iOS asks once for Local Network permission. If you declined, turn it on in iPhone Settings &gt; Privacy &amp; Security &gt; Local Network &gt; Cold Aisle. On the Mac, it is in System Settings &gt; Privacy &amp; Security &gt; Local Network.</li>
-<li>For IPMI, "IPMI over LAN" must be enabled on the BMC, and UDP port 623 must be allowed through any firewall between you and it. Some BMCs ship with IPMI over LAN turned off; it is switched on in the BMC's own web interface.</li>
-<li>A remote-access connection of the PPTP kind cannot be used: iOS has not supported PPTP since iOS 10. IKEv2 and L2TP work.</li>
+<li>iOS asks once for Local Network permission. If you declined, turn it on in iPhone Settings &gt; Privacy &amp; Security &gt; Local Network &gt; Cold Aisle. On the Mac, it's in System Settings &gt; Privacy &amp; Security &gt; Local Network.</li>
+<li>For IPMI, "IPMI over LAN" must be enabled on the BMC, and UDP port 623 must be allowed through any firewall between you and it. Some BMCs ship with IPMI over LAN turned off. You can switch it on in the BMC's own web interface.</li>
+<li>PPTP won't work, because iOS dropped it in iOS 10. IKEv2 and L2TP work.</li>
 <li>If your Mac can reach the server and your iPhone cannot, turn on Settings &gt; Mac bridge &gt; <em>Let my iPhone connect through this Mac</em> on the Mac, and Settings &gt; Mac bridge &gt; <em>Reach servers through my Mac</em> on the iPhone.</li>
 </ul>
 </section>
 <section id="sign-in">
 <h2>Sign-in fails with the right password</h2>
-<p>Check that the BMC user is enabled for the interface in use (some BMCs set Redfish and IPMI access separately per user), and that the account is not locked after too many attempts. BMCs that require an extra IPMI key (Kg) are not supported in this version.</p>
+<p>Check that the BMC user is enabled for the interface in use (some BMCs set Redfish and IPMI access separately per user), and that the account isn't locked after too many attempts. BMCs that require an extra IPMI key (Kg) aren't supported in this version.</p>
 </section>
 <section id="certificate">
 <h2>It says the certificate changed</h2>
-<p>The server is presenting a different certificate than the one you accepted. If you replaced the certificate or updated or reset the BMC, open Settings &gt; Certificate pins, reset the pin for that server, and connect again to see the new fingerprint. If you did not, do not enter your password until you know why.</p>
+<p>The server is presenting a different certificate than the one you accepted. If you replaced the certificate or updated or reset the BMC, open Settings &gt; Certificate pins, reset the pin for that server, and connect again to see the new fingerprint. If you didn't, don't enter your password until you know why.</p>
 </section>
 <section id="missing">
 <h2>Sensors or the event log are missing</h2>
-<p>Some BMCs give sensors and logs over Redfish only with a license. Cold Aisle then uses IPMI for that server if it is enabled. The Connection screen of a server (Hardware &gt; Connection) shows which protocol is in use and what works over it.</p>
+<p>Some BMCs give sensors and logs over Redfish only with a license. In that case Cold Aisle uses IPMI for that server, if IPMI is enabled. The Connection screen of a server (Hardware &gt; Connection) shows which protocol is in use and what works over it.</p>
 </section>
 <section id="power-actions">
 <h2>Power buttons don't work</h2>
 <h3>The power buttons open the Pro sheet</h3>
 <p>Power control is part of Cold Aisle Pro. Health, sensors, the event log and the identify light are free for two servers.</p>
 <h3>A power action is refused</h3>
-<p>The BMC user needs operator or administrator rights to control power. A clean shut down also needs an operating system that answers; if it does not, use Force off or Power cycle.</p>
+<p>The BMC user needs operator or administrator rights to control power. A clean shutdown also needs an OS that still answers. If it doesn't, use Force off or Power cycle.</p>
 </section>
 <section id="consoles">
-<h2>The console will not open</h2>
+<h2>The console won't open</h2>
 <p>Both consoles are part of Cold Aisle Pro. The serial console needs console redirection on in the BIOS. The BMC's web console only loads for the certificate you pinned.</p>
 </section>
 <section id="widget">
@@ -118,10 +118,10 @@
 </section>
 <section id="compat">
 <h2>Help the app work with your board</h2>
-<p>BMCs differ by board and firmware. If something does not work, or if everything does on a board that is not listed anywhere, a compatibility report helps: open the server, then Hardware &gt; Connection &gt; <em>Share a compatibility report</em>. It contains the maker, model, firmware versions, the protocol in use and what works, and leaves out the server's name, address, user name, serial number and password. Read it, then paste it into an issue.</p>
+<p>BMCs differ by board and firmware. If something doesn't work, or everything works on a board nobody has listed yet, a compatibility report helps: open the server, then Hardware &gt; Connection &gt; <em>Share a compatibility report</em>. It contains the maker, model, firmware versions, the protocol in use and what works, and leaves out the server's name, address, user name, serial number and password. Read it, then paste it into an issue.</p>
 </section>
 <section id="limits">
-<h2>What it does not do</h2>
+<h2>What it doesn't do</h2>
 <p>There is no built-in graphical KVM. For that, the app opens the BMC's own web console.</p>
 </section>
 </div>
