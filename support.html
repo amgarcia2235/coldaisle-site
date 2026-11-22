@@ -10,7 +10,7 @@
 <main>
 <nav><a href="index.html">Cold Aisle</a><a href="privacy.html">Privacy</a></nav>
 <h1>Support</h1>
-<p class="muted">Help for Cold Aisle on iPhone and iPad.</p>
+<p class="muted">Help for Cold Aisle on iPhone, iPad and Mac.</p>
 
 <div class="card">
 <p><strong>Get in touch:</strong> most answers are on this page. For anything else, open an issue at <a href="https://github.com/amgarcia2235/coldaisle-site/issues">github.com/amgarcia2235/coldaisle-site/issues</a>. We reply within 48 hours.</p>
@@ -24,16 +24,17 @@
 <li>The app tries Redfish first, then IPMI. For Redfish it shows you the fingerprint of the server's certificate before you type a password; compare it with the BMC's web page if you can.</li>
 <li>Enter the BMC user name and password. They are stored in the Keychain on this device only.</li>
 </ol>
-<p>Your iPhone or iPad must be able to reach the BMC's address: on the same network, or through a VPN that iOS supports.</p>
+<p>Your iPhone, iPad or Mac must be able to reach the BMC's address: on the same network, through a remote-access connection into the management network, or through your own Mac.</p>
 
 <h2>Common questions</h2>
 
 <p><strong>The app cannot reach my server.</strong></p>
 <ul>
-<li>Check that the phone is on the management network or on a VPN into it. Opening the BMC's web page in Safari on the same phone is a quick test.</li>
-<li>iOS asks once for Local Network permission. If you declined, turn it on in iPhone Settings &gt; Privacy &amp; Security &gt; Local Network &gt; Cold Aisle.</li>
+<li>Check that the device is on the management network or has a remote-access connection into it. Opening the BMC's web page in a browser on the same device is a quick test.</li>
+<li>iOS asks once for Local Network permission. If you declined, turn it on in iPhone Settings &gt; Privacy &amp; Security &gt; Local Network &gt; Cold Aisle. On the Mac, it is in System Settings &gt; Privacy &amp; Security &gt; Local Network.</li>
 <li>For IPMI, "IPMI over LAN" must be enabled on the BMC, and UDP port 623 must be allowed through any firewall between you and it. Some BMCs ship with IPMI over LAN turned off; it is switched on in the BMC's own web interface.</li>
-<li>A VPN of the PPTP kind cannot be used: iOS has not supported PPTP since iOS 10. IKEv2 and L2TP work.</li>
+<li>If your Mac can reach the server and your iPhone cannot, turn on Settings &gt; Mac bridge &gt; <em>Let my iPhone connect through this Mac</em> on the Mac, and Settings &gt; Mac bridge &gt; <em>Reach servers through my Mac</em> on the iPhone.</li>
+<li>A remote-access connection of the PPTP kind cannot be used: iOS has not supported PPTP since iOS 10. IKEv2 and L2TP work.</li>
 </ul>
 
 <p><strong>It says the certificate changed.</strong> The server is presenting a different certificate than the one you accepted. If you replaced the certificate or updated or reset the BMC, open Settings &gt; Certificate pins, reset the pin for that server, and connect again to see the new fingerprint. If you did not, do not enter your password until you know why.</p>
@@ -48,16 +49,17 @@
 
 <p><strong>The widget is out of date.</strong> The widget shows the app's last check. Open the app to refresh it, or turn on Settings &gt; Refresh in the background (iOS decides how often that runs).</p>
 
-<p><strong>I bought Pro on another device.</strong> Settings &gt; Restore purchases.</p>
+<p><strong>I bought Pro on another device.</strong> Settings &gt; Restore purchases. One purchase covers your Mac, iPhone and iPad.</p>
 
 <h2>Help the app work with your board</h2>
 <p>BMCs differ by board and firmware. If something does not work, or if everything does on a board that is not listed anywhere, a compatibility report helps: open the server, then Hardware &gt; Connection &gt; <em>Share a compatibility report</em>. It contains the maker, model, firmware versions, the protocol in use and what works, and leaves out the server's name, address, user name, serial number and password. Read it, then paste it into an issue.</p>
 
-<h2>What it does not do</h2>
-<p>This version has no remote console (KVM) and does not update firmware.</p>
+<h2>Consoles and firmware</h2>
+<p>Cold Aisle has a serial console (Serial over LAN, over IPMI) and opens the BMC's own web console; both are part of Pro. It has no graphical remote console (KVM) of its own.</p>
+<p>On servers that use Redfish, the installed firmware versions are free to see, and with Pro the app can send the BMC a new firmware image. Use only an image from the board maker, for exactly that board, and do not power the server off while it is being written.</p>
 
 <h2>Subscriptions</h2>
-<p>Monthly and yearly Pro renew until cancelled. Manage or cancel them in iPhone Settings &gt; your name &gt; Subscriptions. The lifetime option is a single purchase.</p>
+<p>Monthly and yearly Pro renew until cancelled. Manage or cancel them in iPhone Settings &gt; your name &gt; Subscriptions, or on the Mac in the App Store app under your account. The lifetime option is a single purchase.</p>
 </main>
 </body>
 </html>
